@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
-      'https://biscavo-club.dreamy-vole-5554.chatgpt.site',
+      'https://biscavo.com',
   ),
   title: 'Biscavo — Dessert, done differently.',
   description:
