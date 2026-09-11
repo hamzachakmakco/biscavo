@@ -152,7 +152,13 @@ function Wordmark({ inverse = false }: { inverse?: boolean }) {
       className={`wordmark ${inverse ? 'wordmark-inverse' : ''}`}
       aria-label="Biscavo home"
     >
-      BISCAVO<span>.</span>
+      <Image
+        src="/images/biscavo-wordmark.webp"
+        alt="Biscavo Desserts"
+        width={1198}
+        height={505}
+        className="wordmark-image"
+      />
     </a>
   );
 }
@@ -220,6 +226,9 @@ function MembershipCard({ compact = false }: { compact?: boolean }) {
         transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
       >
         <span className="card-shine" aria-hidden="true" />
+        <motion.div className="card-drip-texture" animate={reduceMotion ? undefined : { y: [0, 3, 0] }} transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut' }} aria-hidden="true">
+          <Image src="/images/biscavo-drip.webp" alt="" width={1254} height={335} />
+        </motion.div>
         <div className="card-topline">
           <Wordmark inverse />
           <span className="card-club-label">Club</span>
@@ -448,10 +457,9 @@ export default function Home() {
           transition={{ duration: 1.35, times: [0, 0.72, 1] }}
           aria-hidden="true"
         >
-          <motion.span className="intro-glow" initial={{ scale: .6, opacity: 0 }} animate={{ scale: 1.2, opacity: [0, .6, 0] }} transition={{ duration: 1.1 }} />
-          <motion.p className="relative text-3xl font-black tracking-[-0.08em]" initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 180, damping: 18 }}>
-            BISCAVO<span className="text-brand">.</span>
-          </motion.p>
+          <motion.div className="intro-logo-art" initial={{ opacity: 0, scale: .94 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 150, damping: 18 }}>
+            <Image src="/images/biscavo-logo.webp" alt="" width={1000} height={1000} priority />
+          </motion.div>
         </motion.div>
       )}
 
@@ -468,7 +476,13 @@ export default function Home() {
       </header>
 
       <section className="hero-section">
+        <motion.div className="hero-drip-crown" initial={{ y: -50, scaleY: .86 }} animate={{ y: 0, scaleY: 1 }} transition={{ type: 'spring', stiffness: 95, damping: 17, delay: .08 }} aria-hidden="true">
+          <Image src="/images/biscavo-drip.webp" alt="" width={1254} height={335} priority />
+        </motion.div>
         <motion.div className="hero-copy" style={reduceMotion ? undefined : { opacity: heroCopyOpacity }}>
+          <motion.div className="hero-brand-lockup" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .16 }}>
+            <Image src="/images/biscavo-wordmark.webp" alt="Biscavo Desserts" width={1198} height={505} priority />
+          </motion.div>
           <motion.p className="eyebrow" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .18 }}>BISCAVO / EST. 2026</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .24, duration: .6 }}>
             Dessert,<br />done <em>differently.</em>
@@ -500,6 +514,10 @@ export default function Home() {
         <p className="hero-footnote">Concept photography and product details are placeholders pending the final Biscavo menu.</p>
       </section>
 
+      <motion.div className="brand-drip-divider" initial={{ y: -16 }} whileInView={{ y: 0 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 100, damping: 18 }} aria-hidden="true">
+        <Image src="/images/biscavo-drip.webp" alt="" width={1254} height={335} />
+      </motion.div>
+
       <section id="experience" className="experience-section section-pad">
         <motion.div className="section-title-row" {...reveal}>
           <div><Eyebrow>The Biscavo experience</Eyebrow><SectionHeading>Not just dessert.</SectionHeading></div>
@@ -510,6 +528,7 @@ export default function Home() {
             const Icon = item.icon;
             return (
               <motion.article key={item.title} className={`experience-card ${item.tone}`} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ delay: index * .08, duration: .45 }} whileHover={reduceMotion ? undefined : { y: -5, rotate: index % 2 ? -.5 : .5 }}>
+                {item.tone === 'experience-pink' && <Image src="/images/biscavo-drip.webp" alt="" width={1254} height={335} className="experience-drip" aria-hidden="true" />}
                 <div className="experience-card-top"><span>{item.number}</span><Icon aria-hidden="true" /></div>
                 <div><h3>{item.title}</h3><p>{item.copy}</p></div>
               </motion.article>
@@ -583,6 +602,7 @@ export default function Home() {
         <div className="offers-grid">
           {offers.map((offer, index) => (
             <motion.article key={offer.title} className={`offer-card ${offer.className}`} initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .09 }}>
+              {offer.className === 'offer-primary' && <Image src="/images/biscavo-drip.webp" alt="" width={1254} height={335} className="offer-drip" aria-hidden="true" />}
               {offer.className === 'offer-photo' && <Image src="/images/biscavo-signature-waffle.webp" alt="Pistachio waffle offer concept" width={1122} height={1402} className="offer-dessert" loading="lazy" />}
               <div className="offer-content"><span>{offer.tag}</span><h3>{offer.title}</h3><p>{offer.note}</p><button onClick={() => setSelectedOffer(offer)}>View offer <ArrowRight /></button></div>
               <DataLabel inverse={offer.className !== 'offer-primary'} />

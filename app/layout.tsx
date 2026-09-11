@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: 'Biscavo — Dessert, done differently.',
   description:
     'Premium desserts, exclusive rewards and one club. Discover Biscavo.',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: 'Biscavo — Dessert, done differently.',
     description:
